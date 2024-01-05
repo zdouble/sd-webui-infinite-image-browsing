@@ -55,9 +55,19 @@ export function downloadFiles(urls: string[]) {
   link.style.display = 'none';
   document.body.appendChild(link);
 
-  urls.forEach((url) => {
-    link.href = url;
-    link.download = ''
+  urls.forEach((url, index) => {
+    const urlObject = new URL(url)
+    let fileName = ''
+    if (!isImageFile(urlObject.pathname)) {
+      const path = urlObject.searchParams.get('path')
+      if (path) {
+        fileName = `${path.split('/').pop()}`
+      } else {
+        fileName = `${+new Date()}-${index}`
+      }
+    }
+    link.href = urlObject.href;
+    link.download = fileName;
     link.click();
   });
 
