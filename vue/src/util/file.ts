@@ -57,13 +57,13 @@ export function downloadFiles(urls: string[]) {
 
   urls.forEach((url) => {
     const urlObject = new URL(url, window.location.origin)
-    let fileName = ''
+    let filename = ''
     const disposition = urlObject.searchParams.get('disposition')
     if (disposition) {
-      fileName = disposition
+      filename = disposition
     }
     link.href = url;
-    link.download = fileName;
+    link.download = filename;
     link.click();
   });
 
