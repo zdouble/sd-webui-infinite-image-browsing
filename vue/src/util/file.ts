@@ -59,9 +59,9 @@ export function downloadFiles(urls: string[]) {
     const urlObject = new URL(url, window.location.origin)
     let fileName = ''
     if (!isImageFile(urlObject.pathname)) {
-      const path = urlObject.searchParams.get('path')
-      if (path) {
-        fileName = `${path.split('/').pop()}`
+      const disposition = urlObject.searchParams.get('disposition')
+      if (disposition) {
+        fileName = disposition
       } else {
         fileName = `${+new Date()}-${index}`
       }
