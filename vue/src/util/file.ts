@@ -55,18 +55,14 @@ export function downloadFiles(urls: string[]) {
   link.style.display = 'none';
   document.body.appendChild(link);
 
-  urls.forEach((url, index) => {
+  urls.forEach((url) => {
     const urlObject = new URL(url, window.location.origin)
     let fileName = ''
-    if (!isImageFile(urlObject.pathname)) {
-      const disposition = urlObject.searchParams.get('disposition')
-      if (disposition) {
-        fileName = disposition
-      } else {
-        fileName = `${+new Date()}-${index}`
-      }
+    const disposition = urlObject.searchParams.get('disposition')
+    if (disposition) {
+      fileName = disposition
     }
-    link.href = urlObject.href;
+    link.href = url;
     link.download = fileName;
     link.click();
   });
