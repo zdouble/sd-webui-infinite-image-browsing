@@ -56,7 +56,7 @@ export function downloadFiles(urls: string[]) {
   document.body.appendChild(link);
 
   urls.forEach((url, index) => {
-    const urlObject = new URL(url)
+    const urlObject = new URL(url, window.location.origin)
     let fileName = ''
     if (!isImageFile(urlObject.pathname)) {
       const path = urlObject.searchParams.get('path')
